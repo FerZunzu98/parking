@@ -27,24 +27,36 @@ class Parking {
      */
     MeterCoche(coche) {
 
-        if (this._capacidad>0) {
+        if (this._capacidad > 0) {
             this._capacidad--;
             if (coche.lavado == true) {
                 this._tunel_lavado.push(coche.matricula);
-            }else{
-            this._coches.push(coche.matricula);
+            } else {
+                this._coches.push(coche.matricula);
             };
             return 0;
         };
         return -1;
     };
+    /**
+     * @description Nos devuelve si el coche esta o no en el parking
+     * @param {string} matricula  coche a buscar
+     * @return {boolean}
+     */
+    BuscarCoche(matricula) {
+        if (this._coches.indexOf(matricula) == -1 && this._tunel_lavado.indexOf(matricula) == -1) {
+            return false;
+        } else {
+            return true;
+        };
+    };
 };
 
-let parking= new Parking(2)
-let coche1={
-    matricula:"423454",
-    lavado:true
+let parking = new Parking(2)
+let coche1 = {
+    matricula: "423454",
+    lavado: true
 };
 parking.MeterCoche(coche1)
 
-console.log(parking)
+console.log(parking.BuscarCoche("423654"))
